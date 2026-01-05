@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from server.services.ollama_services import get_available_models
+from api.services.ollama_services import get_available_models
 
 model_bp=Blueprint('model_bp', __name__)
 

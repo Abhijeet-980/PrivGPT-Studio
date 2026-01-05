@@ -2,12 +2,12 @@ from flask import Blueprint, request, jsonify, Response, current_app
 import requests
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
-from server import gemini_model, mongo
+from api import gemini_model, mongo
 from bson import ObjectId
-from server.utils.file_utils import allowed_file, extract_text_from_pdf_bytes
+from api.utils.file_utils import allowed_file, extract_text_from_pdf_bytes
 import json
 import google.generativeai as genai
-from server.config import Config
+from api.config import Config
 import jwt
 from functools import wraps
 
