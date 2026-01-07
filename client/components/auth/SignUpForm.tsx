@@ -225,7 +225,7 @@ export function SignUpForm() {
                 control={form.control}
                 name="dob"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col justify-end">
                     <FormLabel>Date of Birth</FormLabel>
 
                     <Popover>
@@ -265,7 +265,7 @@ export function SignUpForm() {
                 control={form.control}
                 name="phone"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="flex flex-col justify-end">
                     <FormLabel>Phone</FormLabel>
                     <FormControl>
                       <Input type="tel" placeholder="123-456-7890" {...field} />
