@@ -12,6 +12,7 @@
 ## 🔗 Quick Links
 - [✨ Ways to Contribute](#-ways-to-contribute)
 - [🔍 How to Find Suitable Issues](#-how-to-find-suitable-issues)
+- [🚨 Mandatory Contribution Rules](#-mandantory-contribution-rules)
 - [📝 Issue Guidelines](#-issue-guidelines)
 - [🌟 How to Submit a Contribution / PR](#-how-to-submit-a-contribution--pr)
 - [📜 Code of Conduct](#-code-of-conduct)
@@ -31,6 +32,42 @@
 ## 🔍 How to Find Suitable Issues
 - Look for issues with `easy`, `beginner`, or `level-1` tags and ask to be assigned.
 - Use PrivGPT Studio yourself and **create your own issues** for bugs, improvements, or feature suggestions.
+
+<h3 align="right"><a href="#top">⬆️</a></h3>
+
+## 🚨 Mandatory Contribution Rules
+
+### 1. Issue & PR Templates (Required)
+
+GitHub will automatically show templates when you:
+- create a new Issue
+- open a Pull Request
+
+You **must follow the template structure exactly**
+
+Template links (for reference):
+- Issue Templates: https://github.com/Rucha-Ambaliya/PrivGPT-Studio/tree/main/.github/ISSUE_TEMPLATE
+- PR Template: https://github.com/Rucha-Ambaliya/PrivGPT-Studio/blob/main/.github/PULL_REQUEST_TEMPLATE.md
+
+If the template does not appear for any reason:
+- Manually copy and paste the template
+- Fill in all required sections
+- Follow the title convention and section skeleton
+
+Issues will not be assigned and Pull Requests will not be reviewed or merged if:
+- templates are missing,
+- the title format is not followed, or
+- the required structure is ignored.
+
+### 2. Do Not Commit Dependency Files (Strict Rule)
+
+Never commit the following files:
+  - `package.json`
+  - `package-lock.json`
+  - `requirements.txt`
+
+These files often cause dependency conflicts and deployment failures.  
+Any PR containing them will be requested for changes or closed.
 
 <h3 align="right"><a href="#top">⬆️</a></h3>
 
