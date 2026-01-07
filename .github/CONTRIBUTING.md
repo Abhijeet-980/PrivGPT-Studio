@@ -72,7 +72,7 @@ Before you begin, make sure you have the following installed:
    cd PrivGPT-Studio
    ```
 
-4. Set up the project (if not done already) by following instructions in [Getting Started](../README.md#3-set-up-the-client-nextjs-frontend)
+4. Set up the project (if not done already) by following instructions in [Getting Started](https://github.com/Rucha-Ambaliya/PrivGPT-Studio?tab=readme-ov-file#%EF%B8%8F-getting-started)
 
 5. 🔗 Set upstream to the main repo:
     ```
@@ -127,7 +127,7 @@ please join our [Discord Server](https://discord.gg/J9z5T52rkZ).
 ## 📜 Code of Conduct
 We are committed to creating a welcoming and inclusive environment for everyone. Please be respectful, inclusive, and considerate in all interactions.
 
-By participating in this project, you agree to follow our [Code of Conduct](./CODE_OF_CONDUCT.md).
+By participating in this project, you agree to follow our [Code of Conduct](https://github.com/Rucha-Ambaliya/PrivGPT-Studio?tab=readme-ov-file#).
 
 If you witness or experience unacceptable behavior, please report it privately via [ruchaambaliya@gmail.com](mailto:ruchaambaliya@gmail.com).
 
