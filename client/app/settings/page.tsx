@@ -17,9 +17,20 @@ export default function SettingsPage() {
   const { token, isLoading: authLoading } = useAuth();
   const router = useRouter();
   
-  const [profile, setProfile] = useState<{ username: string; email: string } | null>(null);
+  const [profile, setProfile] = useState<{ 
+    email: string;
+    username: string; 
+    gender: string;
+    dob: string;
+    phone: string;
+  } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({ username: "" });
+  const [formData, setFormData] = useState({ 
+    username: "",
+    gender: "",
+    dob: "",
+    phone: ""
+  });
   
   const [models, setModels] = useState<{ local_models: string[]; cloud_models: string[] }>({
     local_models: [],
@@ -46,7 +57,12 @@ export default function SettingsPage() {
         if (profileRes.ok) {
           const profileData = await profileRes.json();
           setProfile(profileData);
-          setFormData({ username: profileData.username || "" });
+          setFormData({ 
+            username: profileData.username || "",
+            gender: profileData.gender || "",
+            dob: profileData.dob || "",
+            phone: profileData.phone || "",
+          });
         }
 
         const modelsRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/models`);
@@ -96,7 +112,12 @@ export default function SettingsPage() {
 
   const cancelEdit = () => {
     if (profile) {
-      setFormData({ username: profile.username });
+      setFormData({ 
+        username: profile.username,
+        gender: profile.gender,
+        dob: profile.dob,
+        phone: profile.phone,
+      });
     }
     setIsEditing(false);
   };
@@ -152,20 +173,6 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4 pt-4">
               <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
-                <div className="relative">
-                  <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="username"
-                    value={isEditing ? formData.username : profile?.username || ""}
-                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                    disabled={!isEditing}
-                    className={`pl-9 ${!isEditing ? "bg-muted" : "bg-background"}`}
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -182,22 +189,59 @@ export default function SettingsPage() {
                   </p>
                 )}
               </div>
-
+              
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="username">Username</Label>
                 <div className="relative">
-                  <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
-                    id="password"
-                    type="password"
-                    value="********"
-                    disabled
-                    className="pl-9 bg-muted"
+                    id="username"
+                    value={isEditing ? formData.username : profile?.username || ""}
+                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                    disabled={!isEditing}
+                    className={`pl-9 ${!isEditing ? "bg-muted" : "bg-background"}`}
                   />
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Password cannot be viewed for security reasons.
-                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="gender">Gender</Label>
+                <div className="relative">
+                  <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="gender"
+                    value={isEditing ? formData.gender : profile?.gender || ""}
+                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                    disabled={!isEditing}
+                    className={`pl-9 ${!isEditing ? "bg-muted" : "bg-background"}`}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="dob">DOB</Label>
+                <div className="relative">
+                  <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="dob"
+                    value={isEditing ? formData.dob : profile?.dob || ""}
+                    onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+                    disabled={!isEditing}
+                    className={`pl-9 ${!isEditing ? "bg-muted" : "bg-background"}`}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone</Label>
+                <div className="relative">
+                  <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="phone"
+                    value={isEditing ? formData.phone : profile?.phone || ""}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    disabled={!isEditing}
+                    className={`pl-9 ${!isEditing ? "bg-muted" : "bg-background"}`}
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>
