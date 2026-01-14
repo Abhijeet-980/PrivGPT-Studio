@@ -3376,7 +3376,7 @@ export default function ChatPage() {
               <p className="text-sm text-muted-foreground">Fetching model metadata...</p>
             </div>
           ) : modelDetails ? (
-            <ScrollArea className="flex-1 pr-4 -mr-4">
+            <div className="flex-1 overflow-y-auto min-h-0 pr-2">
               <div className="grid gap-6 py-4">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="bg-muted/50 p-3 rounded-lg border">
@@ -3410,7 +3410,7 @@ export default function ChatPage() {
                     <h3 className="text-sm font-semibold flex items-center">
                       <FileText className="w-4 h-4 mr-2" /> Chat Template
                     </h3>
-                    <div className="bg-slate-950 text-slate-50 p-4 rounded-md text-xs font-mono whitespace-pre-wrap overflow-x-auto max-h-[200px] border border-slate-800">
+                    <div className="bg-slate-950 text-slate-50 p-4 rounded-md text-xs font-mono whitespace-pre-wrap overflow-auto max-h-[300px] border border-slate-800">
                       {modelDetails.template}
                     </div>
                   </div>
@@ -3421,7 +3421,7 @@ export default function ChatPage() {
                     <h3 className="text-sm font-semibold flex items-center">
                       <Settings className="w-4 h-4 mr-2" /> Default Parameters
                     </h3>
-                    <div className="bg-muted p-4 rounded-md text-xs font-mono whitespace-pre-wrap border">
+                    <div className="bg-muted p-4 rounded-md text-xs font-mono whitespace-pre-wrap border overflow-auto max-h-[300px]">
                       {modelDetails.parameters}
                     </div>
                   </div>
@@ -3430,13 +3430,13 @@ export default function ChatPage() {
                 {modelDetails.modelfile && (
                    <div className="space-y-2">
                      <h3 className="text-sm font-semibold">Modelfile Snippet</h3>
-                     <div className="bg-muted p-3 rounded-md text-xs font-mono text-muted-foreground truncate">
-                       {modelDetails.modelfile.substring(0, 150)}...
+                     <div className="bg-muted p-3 rounded-md text-xs font-mono text-muted-foreground whitespace-pre-wrap overflow-auto max-h-[300px]">
+                       {modelDetails.modelfile}
                      </div>
                    </div>
                 )}
               </div>
-            </ScrollArea>
+            </div>
           ) : (
             <div className="py-8 text-center text-muted-foreground">
               <p>No details available for this model.</p>
