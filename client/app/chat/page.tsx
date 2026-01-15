@@ -1873,56 +1873,64 @@ export default function ChatPage() {
     );
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-  // Ctrl/Cmd + Enter → Send message
-  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
-    e.preventDefault();
-    handleSend();
-    return;
-  }
-
-  // Enter → Send (existing behavior)
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    handleSend();
-  }
-};
 
 useEffect(() => {
   const handleGlobalShortcuts = (e: KeyboardEvent) => {
-    // Ctrl/Cmd + K → Clear chat (open confirmation modal)
+    const target = e.target as HTMLElement;
+
+    // Do NOT trigger shortcuts while typing in inputs/textareas
+    if (
+      target.tagName === "INPUT" ||
+      target.tagName === "TEXTAREA" ||
+      target.isContentEditable
+    ) {
+      return;
+    }
+
+    // Ctrl / Cmd + K → Clear chat
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
       e.preventDefault();
       setClearChatSessionModal(true);
       return;
     }
 
-    // Ctrl/Cmd + M → Switch model
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "m") {
-      e.preventDefault();
+    // Ctrl / Cmd + M → Switch model (cycle across local + cloud)
+if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "m") {
+  e.preventDefault();
 
-      const models =
-        selectedModelType === "local" ? localModels : cloudModels;
+  const allModels = [
+    ...localModels.map((m) => ({ name: m, type: "local" as const })),
+    ...cloudModels.map((m) => ({ name: m, type: "cloud" as const })),
+  ];
 
-      if (!models || models.length <= 1) return;
+  if (allModels.length <= 1) return;
 
-      const currentIndex = models.indexOf(selectedModel);
-      const nextIndex = (currentIndex + 1) % models.length;
-      const nextModel = models[nextIndex];
+  const currentIndex = allModels.findIndex(
+    (m) => m.name === selectedModel && m.type === selectedModelType
+  );
 
-      setSelectedModel(nextModel);
+  const nextIndex =
+    currentIndex === -1
+      ? 0
+      : (currentIndex + 1) % allModels.length;
 
-      try {
-        localStorage.setItem("selected_model_name", nextModel);
-        localStorage.setItem("selected_model_type", selectedModelType);
-      } catch {}
-    }
+  const next = allModels[nextIndex];
+
+  setSelectedModel(next.name);
+  setSelectedModelType(next.type);
+
+  try {
+    localStorage.setItem("selected_model_name", next.name);
+    localStorage.setItem("selected_model_type", next.type);
+  } catch {}
+}
+
   };
 
   window.addEventListener("keydown", handleGlobalShortcuts);
-  return () => window.removeEventListener("keydown", handleGlobalShortcuts);
+  return () =>
+    window.removeEventListener("keydown", handleGlobalShortcuts);
 }, [selectedModel, selectedModelType, localModels, cloudModels]);
-
 
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -3249,7 +3257,7 @@ useEffect(() => {
                     },
                   }}
                   className="flex min-h-[80px] w-full rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:border-input disabled:cursor-not-allowed disabled:opacity-50"
-                  onKeyDown={handleKeyPress}
+
                 >
                   <Mention
                     trigger="@"
@@ -3267,7 +3275,6 @@ useEffect(() => {
                   value={input}
                   disabled={isLimitReached}
                   onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyPress}
                   placeholder={isLimitReached ? "Session limit reached. Please start a new chat." :"Type your message in markdown..."}
                   className={`flex-1 resize-none min-h-[80px] ${isRecording ? "text-transparent caret-foreground" : ""
                     }`}
