@@ -70,6 +70,13 @@ export default function header() {
                 Dashboard
               </Link>
             )}
+            
+            {!token && (
+              <Link href="/sign-in">
+                <Button>Sign In</Button>
+              </Link>
+            )}
+
             <Link href={token ? "/chat" : "/sign-in?redirect=/chat"}>
               <Button variant="outline">Try Chat</Button>
             </Link>
@@ -135,6 +142,21 @@ export default function header() {
                     </Link>
                   </SheetClose>
                 )}
+                
+                {!token && (
+                  <SheetClose asChild>
+                    <Link href="/sign-in">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start"
+                        onClick={closeMobileMenu}
+                      >
+                        Sign In
+                      </Button>
+                    </Link>
+                  </SheetClose>
+                )}
+
                 <SheetClose asChild>
                   <Link href={token ? "/chat" : "/sign-in?redirect=/chat"}>
                     <Button
