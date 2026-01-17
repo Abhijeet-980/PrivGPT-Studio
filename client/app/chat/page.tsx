@@ -3225,6 +3225,12 @@ if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "m") {
                   value={input}
                   disabled={isLimitReached}
                   onChange={(_event, newValue) => setInput(newValue)}
+                      onKeyDown={(e) => {
+                       if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleSend();
+                     }
+                }}
                   placeholder={isLimitReached ? "Session limit reached. Please start a new chat." :"Type your message and use @ to mention chats..."}
                   style={{
                     control: {
@@ -3275,6 +3281,12 @@ if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "m") {
                   value={input}
                   disabled={isLimitReached}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                     e.preventDefault();
+                     handleSend();
+                    }
+             }}
                   placeholder={isLimitReached ? "Session limit reached. Please start a new chat." :"Type your message in markdown..."}
                   className={`flex-1 resize-none min-h-[80px] ${isRecording ? "text-transparent caret-foreground" : ""
                     }`}
